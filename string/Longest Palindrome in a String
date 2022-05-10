@@ -1,0 +1,60 @@
+QUESTION LINK->https://practice.geeksforgeeks.org/problems/longest-palindrome-in-a-string3411/1
+
+
+#include<bits/stdc++.h>
+using namespace std;
+
+
+ // } Driver Code Ends
+class Solution {
+  public:
+    string longestPalin (string s) {
+       int l ,h ,i;
+       int n = s.length();
+       int mlength = 0;
+       int start ,end;
+       for(int i = 0 ;i< n ;i++) // isme na apn ne kya ki har element ke agal bagal bale element ko match karaya kyonki usnse hi to palindrome ho ga like aba 
+                                    to b ke agal bagal bale match krr diye 
+       {
+           l  = i-1;
+           h = i+1;
+           while(h<n && s[i]==s[h])
+           {
+               h++;
+           }
+           
+           while(l>=0 && s[i]==s[l])
+           {
+               l--;
+           }
+           
+           while(h<n && l>=0 && s[l]==s[h])
+           {
+               h++;
+               l--;
+           }
+           if(mlength<(h-l-1))
+           {
+               mlength = h-l-1;
+               start = l+1;
+            //   end = h;
+           }
+       }
+       end = mlength;
+       return s.substr(start ,end);// ye length leta h agr end ko h krenge to badi length ho jayyegi code here
+    }
+};
+
+// { Driver Code Starts.
+
+int main()
+{
+    int t; cin >> t;
+    while (t--)
+    {
+        string S; cin >> S;
+        
+        Solution ob;
+        cout << ob.longestPalin (S) << endl;
+    }
+}
