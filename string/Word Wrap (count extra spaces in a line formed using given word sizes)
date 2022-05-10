@@ -15,7 +15,7 @@ public:
       int ls[n+1][n+1];
       int c[n+1];
       int inf = INT_MAX;
-      for(int i = 1 ; i<=n;i++)
+      for(int i = 1 ; i<=n;i++)  //space found ki sabse pahle matrix ki form me is tarah ki ye element add krne ke bad konsa element add krr sakte h ya nahi jisse minimum space ho baki
       {
           sp[i][i] = k-nums[i-1];
           for(int j = i+1 ;j<=  n ;j++)
@@ -24,7 +24,7 @@ public:
           }
       }
        
-      for(int i = 1 ;i<=n ;i++)
+      for(int i = 1 ;i<=n ;i++)  // valid spaces ka square krr liya orr unvalid ko ignore krr diya mtlb infinte
       {
           for(int j = i ; j<=n ;j++)
           {
@@ -43,7 +43,7 @@ public:
       }
        
       c[0] = 0;
-      for(int i =1 ; i<=n;i++)
+      for(int i =1 ; i<=n;i++) fir isme apn ne min possible space nikla har line ke liye ki itte word add h ab aage isme add krne prr kam total space sum aayega ya jayada ke according
       {
           c[i] = inf;
           for(int j = 1 ; j<=i ;j++)
