@@ -15,8 +15,8 @@ class Solution
 	        v.push_back(s);
 	    }
 
-	        for(int i =l ;i<=r ;i++)
-	        {
+	        for(int i =l ;i<=r ;i++) //recursive function that employs swap , to swap every character with every other character so as to generate all permutations.
+	        {                          apn ne isme har bar harr character ko dusre ke sath change kiya taki sabhi permutation mil sake
 	            swap(s[l] ,s[i]);
 	            val(s , l+1, r ,v);
 	            swap(s[l] ,s[i]);
