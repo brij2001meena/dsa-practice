@@ -1,0 +1,47 @@
+QUESTION LINK-> https://leetcode.com/problems/string-compression/
+
+
+class Solution {
+public:
+    int compress(vector<char>& v) {
+        int pos=0;
+        int s =0;
+        int count;
+        int i;
+        for(i= 1 ;i<v.size() ;)
+        {
+            if(v[s]==v[i])
+            {
+                i++;
+            }
+            else{
+                v[pos++] = v[s];
+                count = i-s;
+                if(count>1)
+                {
+                    string d = to_string(count);
+                    for(auto ch:d)
+                    {
+                        v[pos++] = ch;
+                    }
+                }
+                s = i;
+                i++;
+            }
+        }
+        if(i==v.size())
+        {
+             v[pos++] = v[s];
+                count = i-s;
+                if(count>1)
+                {
+                    string d = to_string(count);
+                    for(auto ch:d)
+                    {
+                        v[pos++] = ch;
+                    }
+                }
+        }
+        return pos;
+    }
+};
