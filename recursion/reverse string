@@ -1,0 +1,23 @@
+codingninjas.com/codestudio/problems/reverse-the-string_799927?leftPanelTab=1&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_13
+
+void rev(string &str , int s , int e){
+    if(s>e)
+    {
+        return ;
+    }
+    else{
+        swap(str[s] , str[e]);
+        rev(str , s+1 , e-1);
+    }
+}
+string reverseString(string str)
+{
+	if(str.size()==0)
+    {
+        return "";
+    }
+    else{
+        rev(str , 0 ,str.size()-1);
+        return str;
+    }// Write your code here.
+}
