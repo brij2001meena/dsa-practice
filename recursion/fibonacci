@@ -1,0 +1,38 @@
+https://leetcode.com/problems/fibonacci-number/submissions/
+
+class Solution {
+public:
+    map<int, int> m; //store results in map for fast execution (memoization)
+    int fib(int n) {
+        if(n<2)
+        {
+            return n;
+        }
+        else{
+            if(m.find(n)!=m.end())
+            {
+                return m[n];
+            }
+            else{
+                m.insert({n , fib(n-1)+fib(n-2)});
+                return m[n];
+            }
+            
+        }
+//         if(n<2)
+//         {
+//             return n;
+//         }
+//         else{
+//             if(m.find(n)!=m.end())
+//             {
+//                 return m[n];
+//             }
+//             else{
+//                 m.insert({n ,fib(n-1)+fib(n-2)} );
+//                 return m[n];
+//             }
+            
+//         }
+    }
+};
