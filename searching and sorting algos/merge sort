@@ -1,5 +1,5 @@
 https://www.codingninjas.com/codestudio/problems/merge-sort_920442?leftPanelTab=0&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_14
-
+https://practice.geeksforgeeks.org/problems/merge-sort/1/#
 
 void merge(vector<int>&arr , int s ,int e)
 {
