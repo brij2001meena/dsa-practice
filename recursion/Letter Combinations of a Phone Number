@@ -1,0 +1,35 @@
+https://leetcode.com/problems/letter-combinations-of-a-phone-number/submissions/
+
+
+class Solution {
+public:
+    void comb(string digits , vector<string>mapping , vector<string>&ans , string str , int i ){
+        if(i>=digits.size())
+        {
+            ans.push_back(str);
+        }
+        else{
+            int n = digits[i++]-'0' ;
+            string s = mapping[n];
+            // string str1 = str;
+            for(int j = 0 ;j<s.size() ;j++)
+            {
+                str+=s[j];
+                comb(digits ,mapping , ans , str , i);
+                str.pop_back(); //we make here it to its previos state to add any other element 
+            }
+        }
+    }
+    vector<string> letterCombinations(string digits) {
+        vector<string>mapping ={" ", " " , "abc" , "def" , "ghi" , "jkl" , "mno" , "pqrs", "tuv"  , "wxyz"};
+        vector<string>ans;
+        string st;
+        int i = 0;
+        if(digits.size()==0)
+        {
+            return ans;
+        }
+        comb(digits ,mapping , ans , st , i );
+        return ans;
+    }
+};
