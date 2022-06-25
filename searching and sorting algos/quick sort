@@ -1,0 +1,48 @@
+https://www.codingninjas.com/codestudio/problems/quick-sort_983625?leftPanelTab=0&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_15
+
+
+int partition(vector<int>&arr  ,int s ,int e){
+    int pi = arr[s];
+    int count =0;
+    for(int i = s+1 ;i<=e ;i++)
+    {
+        if(arr[i]<=pi){
+            count++;
+        }
+    }
+    pi = s+count;
+    swap(arr[s] , arr[pi]);
+    int i = s;
+    int j = e;
+    while(i<pi && j>pi)
+    {
+        while(arr[i]<=arr[pi])
+        {
+            i++;
+        }
+        while(arr[j]>arr[pi])
+        {
+            j--;
+        }
+        if(i<pi && j>pi){
+            swap(arr[i++] , arr[j--]);
+        }
+    }
+    return pi;
+}
+void quick(vector<int>&arr , int s ,int e){
+    if(s>=e)
+    {
+        return ;
+    }
+    else{
+        int pi = partition(arr , s ,e);
+        quick(arr , s ,pi-1);
+        quick(arr, pi+1 ,e);
+    }
+}
+vector<int> quickSort(vector<int> arr)
+{
+    quick(arr , 0 , arr.size()-1);
+    return arr;// Write your code here.
+}
