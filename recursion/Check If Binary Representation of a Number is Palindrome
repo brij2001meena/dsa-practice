@@ -1,0 +1,41 @@
+https://www.codingninjas.com/codestudio/problems/check-palindrome_920555?leftPanelTab=1&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_13
+
+
+string bin(long long n , string &s)
+{
+    /* step 1 */
+    if (n > 1)
+        bin(n / 2 , s);
+
+    /* step 2 */
+    string r  = to_string(n%2);
+     return s+=r;
+}
+bool check(string b , int i  ,int e)
+{
+    if(i>e)
+    {
+        return true;
+    }
+    else{
+        if(b[i]==b[e])
+        {
+            return check(b , i+1 , e-1);
+        }
+        else{
+            return false;
+        }
+    }
+}
+bool checkPalindrome(long long n)
+{
+	if(n==0)
+    {
+        return true;
+    }
+    else{
+        string s="";
+        string b = bin(n , s);
+        return check(b , 0 , b.size()-1);
+    }  // Write your code here.
+}
