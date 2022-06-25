@@ -1,0 +1,67 @@
+https://www.codingninjas.com/codestudio/problems/merge-sort_920442?leftPanelTab=0&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_14
+
+
+void merge(vector<int>&arr , int s ,int e)
+{
+    int mid = (s+e)/2;
+    int len1 = mid-s+1;
+    int len2 = e-mid;
+//     int *a = new int[len1];
+//     int *b = new int[len2];
+    vector<int>a;
+    vector<int>b;
+    int mainindex = s;
+    for(int i = 0;i<len1 ; i++)
+    {
+//         a[i] = arr[mainindex++];
+        a.push_back(arr[mainindex++]);
+    }
+//     mainindex = mid+1;
+    for(int i = 0;i<len2 ; i++)
+    {
+//         b[i] = arr[mainindex++];
+         b.push_back(arr[mainindex++]);
+    }
+    mainindex = s;
+    int i = 0;
+    int j = 0;
+    while(i<len1 && j<len2)
+    {
+        if(a[i]<b[j])
+        {
+            arr[mainindex++] = a[i++];
+        }
+        else if(a[i]>=b[j])
+        {
+            arr[mainindex++] = b[j++];
+        }
+    }
+    while(i<len1)
+    {
+        arr[mainindex++] = a[i++];
+    }
+    while(j<len2)
+    {
+        arr[mainindex++] = b[j++];
+    }
+//     delete []a;
+//     delete []b;
+        
+}
+void mergesort(vector<int>&arr , int i, int j)
+{
+    if(i>=j)
+    {
+        return ;
+    }
+    else{
+        int mid = (i+j)/2;
+        mergesort(arr , i , mid);
+        mergesort(arr , mid+1 , j);
+        merge(arr , i , j);
+    }
+}
+void mergeSort(vector < int > & arr, int n) {
+    mergesort(arr , 0 , n-1);
+        // Write your code here.
+}
