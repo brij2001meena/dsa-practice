@@ -1,0 +1,30 @@
+https://practice.geeksforgeeks.org/problems/power-of-numbers-1587115620/1/?page=1&category[]=Recursion&sortBy=submissions#
+
+
+class Solution{
+    public:
+    //You need to complete this fucntion
+    
+    long long  power(int N,int R)
+    {
+        long long ans = helper(N, R);
+        return ans;
+        
+    }
+    
+    long long helper(int N, int R){
+        if(R==1){
+            return N;
+        }
+        if(R%2 == 0){
+            long long temp1 = helper(N, R/2);
+            return (temp1*temp1)%1000000007;
+        }else{
+            long long temp1 = helper(N, R/2+1);
+            long long temp2 = helper(N, R/2);
+            return (temp1*temp2)%1000000007;
+        }
+       
+    }
+
+};
