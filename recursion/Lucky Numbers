@@ -1,0 +1,26 @@
+https://practice.geeksforgeeks.org/problems/lucky-numbers2911/1/?page=1&category[]=Recursion&sortBy=submissions#
+
+
+class Solution{
+public:
+bool lucky(int n , int nremove){
+    if(n<nremove)
+       {
+           return 1;
+       }// code here
+       else{
+           if(n%nremove==0)
+           {
+               return 0;
+           }
+           else{
+               n = (n-n/nremove); // find the new position of element because elemtn before this are removed
+               nremove++;
+               return lucky(n ,nremove);
+           }
+       }
+}
+    bool isLucky(int n) {
+       return lucky(n ,2);
+    }
+};
