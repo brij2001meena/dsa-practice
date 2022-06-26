@@ -1,0 +1,45 @@
+https://practice.geeksforgeeks.org/problems/combination-sum-1587115620/1/?page=1&category[]=Recursion&sortBy=submissions#
+https://leetcode.com/problems/combination-sum/submissions/
+
+class Solution {
+  public:
+   void sumf(vector<vector<int>>& res, int sum,int B, vector<int> &A, vector<int>&ans)
+    {   
+        if(sum>B) //sum greater the target
+        return;
+        if(sum==B)
+        {
+            res.push_back(ans);
+            
+            return;
+        }
+        for(int i=0;i<A.size();++i)
+        {
+             if(!ans.empty() && A[i]<ans.back()) //it will help in sorting
+             continue;
+            
+            ans.push_back(A[i]); //add element in temp vector and call to next element
+            sumf(res,sum+A[i],B,A,ans);
+          
+            ans.pop_back();
+        }
+    }
+    
+    vector<vector<int> > combinationSum(vector<int> &A, int B) {
+        // Your code here
+        sort(A.begin(), A.end());
+        vector<int> A_;
+        for (int i = 0; i < A.size(); ++i) {
+            if (i > 0 && A[i] == A[i-1]) { //remove unique element
+                continue;
+            }
+            
+            A_.push_back(A[i]); //we find unigue and sorted elements
+        }
+        vector<vector<int>> res;
+        vector<int> ans;
+        sumf(res,0,B,A_,ans);
+        return res;
+    }
+  
+};
