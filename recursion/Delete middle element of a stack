@@ -1,0 +1,52 @@
+https://practice.geeksforgeeks.org/problems/delete-middle-element-of-a-stack/1/?page=1&category[]=Recursion&sortBy=submissions#
+
+
+class Solution
+{
+    public:
+    void mid(stack<int>&s ,int sizeOfStack)
+    {
+        int m = ceil(sizeOfStack/2.0);
+        if(s.size()==m)
+        {
+            s.pop();
+            return;
+        }
+        else{
+            int el = s.top();
+            s.pop();
+            mid(s ,sizeOfStack);
+            s.push(el);
+            return;
+        }
+        
+        
+    }
+        // void mid(stack<int>&s ,int sizeOfStack ,int i){
+        // if((i==1 && sizeOfStack%2!=0))
+        // {
+        //     s.pop();
+        //     return;
+        // }
+        // else if((i==0 && sizeOfStack%2==0))
+        // {
+        //     s.pop();
+        //     return;
+        // }
+        // else{
+        //     int el = s.top();
+        //     s.pop();
+        //     i--;
+        //     mid(s ,sizeOfStack ,i);
+        //     s.push(el);
+        //     return;
+        // }
+    // }
+    //Function to delete middle element of a stack.
+    void deleteMid(stack<int>&s, int sizeOfStack)
+    {
+        // int i = ceil((sizeOfStack+1)/2);
+        // mid(s ,sizeOfStack ,i);
+        mid(s ,sizeOfStack );// code here.. 
+    }
+};
