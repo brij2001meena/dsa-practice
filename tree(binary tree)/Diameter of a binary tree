@@ -1,0 +1,59 @@
+https://practice.geeksforgeeks.org/problems/diameter-of-binary-tree/1#
+
+
+class Solution {
+  public:
+    // int height(Node* node)
+    // {
+    //     if(node==NULL)
+    //     {
+    //         return 0;
+    //     }
+        
+    //     int lh = height(node->left);
+    //     int rh = height(node->right);
+        
+    //     int h = max(lh ,rh)+1;
+    //     return h;
+    // }// Function to return the diameter of a Binary Tree.
+    
+    
+    
+    pair<int ,int>difast(Node* root){
+        if(root==NULL){
+            pair<int ,int>p = make_pair(0 ,0);
+            return p;
+        }
+        else{
+            pair<int ,int>pl = difast(root->left);
+            pair<int ,int>pr = difast(root->right);
+            
+            int l = pl.first;
+            int r = pr.first;
+            
+            int h = pl.second +pr.second+1;
+            
+            pair<int ,int>ans;
+            ans.first= max(l , max(r ,h));
+            ans.second = max(pl.second , pr .second)+1;
+            return ans;
+        }
+    }
+    int diameter(Node* root) {
+        // if(root==NULL)
+        // {
+        //     return 0;
+        // }// Your code here
+        // else{
+        //     int l = diameter(root->left);
+        //     int r = diameter(root->right);
+        //     int blr = height(root->left)+height(root->right)+1;
+            
+        //     int ans = max(l , max(r ,blr));
+        //     return ans;
+        // }
+        
+        
+        return difast(root).first;
+    }
+};
