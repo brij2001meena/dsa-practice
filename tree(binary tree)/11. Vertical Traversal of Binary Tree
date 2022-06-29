@@ -1,0 +1,47 @@
+https://practice.geeksforgeeks.org/problems/print-a-binary-tree-in-vertical-order/1#
+
+
+class Solution
+{
+    public:
+    //Function to find the vertical order traversal of Binary Tree.
+    vector<int> verticalOrder(Node *root)
+    {
+        map<int , map<int ,vector<int>>>m;  // maping horizontal distance with level and level with the nodes at that level
+        queue<pair<Node* , pair<int ,int>>>q; // node and its corresponding hd and level
+        
+        vector<int>ans;
+        if(root==NULL){
+            return ans;
+        }
+        
+        q.push(make_pair(root , make_pair(0 ,0)));
+        
+        while(!q.empty()){
+            pair<Node* ,pair<int, int>>temp = q.front();
+            q.pop();
+            Node* frontnode = temp.first; // node extract
+            int hd = temp.second.first; // hd extract
+            int level = temp.second.second; // level extract
+            
+            m[hd][level].push_back(frontnode->data); // add element in the vector of that level of that hd(map of hd mapped with map of level with vector(nodes))
+            
+            if(frontnode->left){
+                q.push(make_pair(frontnode->left , make_pair(hd-1 , level+1)));
+            }
+             if(frontnode->right){
+                q.push(make_pair(frontnode->right , make_pair(hd+1 , level+1)));
+            }
+        }
+        
+        for(auto i:m){ //<int , map<int ,vector<int>>>
+            for(auto j:i.second){ // map<int ,vector<int>>
+                for(auto k:j.second){ //vector<int>
+                    ans.push_back(k);
+                }
+            }
+        }
+        //Your code here
+        return ans;
+    }
+};
