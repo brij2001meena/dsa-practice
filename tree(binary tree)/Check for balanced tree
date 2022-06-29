@@ -1,0 +1,70 @@
+https://practice.geeksforgeeks.org/problems/check-for-balanced-tree/1#
+
+
+class Solution{
+    public:
+    // int height(Node* node)
+    // {
+    //     if(node==NULL)
+    //     {
+    //         return 0;
+    //     }
+        
+    //     int lh = height(node->left);
+    //     int rh = height(node->right);
+        
+    //     int h = max(lh ,rh)+1;
+    //     return h;
+    // }
+    
+    
+    pair<bool ,int>isfast(Node * root){
+        if(root==NULL)
+        {
+            pair<bool ,int>p = make_pair(true ,0);
+            return p;
+        }
+        else{
+            pair<bool , int> l = isfast(root->left);
+            pair<bool , int> r = isfast(root->right);
+            bool op1 = l.first;
+            bool op2 = r.first;
+            bool diff = abs(l.second-r.second)<=1; //condition
+            
+            pair<bool ,int>ans;
+            ans.second = max(l.second , r.second)+1; //height
+            if(op1 && op2 && diff)
+            {
+                ans.first = true;
+            }//  Your Code here
+            else{
+                ans.first= false;
+            }
+            return ans;
+        }
+        
+    }//Function to check whether a binary tree is balanced or not.
+    bool isBalanced(Node *root)
+    {
+        // if(root==NULL)
+        // {
+        //     return true;
+        // }
+        // else{
+        //     bool l = isBalanced(root->left);
+        //     bool r = isBalanced(root->right);
+        //     bool diff = abs(height(root->left)-height(root->right))<=1;
+        //     if(l && r && diff)
+        //     {
+        //         return true;
+        //     }//  Your Code here
+        //     else{
+        //         return false;
+        //     }
+        // }
+        
+        
+        
+        return isfast(root).first;
+    }
+};
