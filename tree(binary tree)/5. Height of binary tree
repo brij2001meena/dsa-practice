@@ -1,0 +1,48 @@
+https://practice.geeksforgeeks.org/problems/height-of-binary-tree/1#
+
+
+class Solution{
+    public:
+    void lo(struct  Node* root ,int &count){
+    queue<Node*>q;
+    q.push(root);
+    q.push(NULL);
+    while(!q.empty()){
+        Node* temp = q.front();
+        q.pop();
+        if(temp==NULL){
+            count++;
+            if(!q.empty()){
+                q.push(NULL);
+            }
+        }
+        else{
+            if(temp->left){
+                q.push(temp->left);
+            }
+            if(temp->right){
+                q.push(temp->right);
+            }
+        }
+    }
+}
+    //Function to find the height of a binary tree.
+    int height(struct Node* node){
+        // code here 
+        int count =0;
+        lo(node , count);
+        return count;
+        
+        
+        // if(node==NULL)
+        // {
+        //     return 0;
+        // }
+        
+        // int lh = height(node->left);
+        // int rh = height(node->right);
+        
+        // int h = max(lh ,rh)+1;
+        // return h;
+    }
+};
