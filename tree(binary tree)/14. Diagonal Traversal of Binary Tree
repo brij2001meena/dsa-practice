@@ -1,0 +1,30 @@
+https://practice.geeksforgeeks.org/problems/diagonal-traversal-of-binary-tree/1/#
+
+
+void pre(Node *root ,map<int ,vector<int>>&m ,int slope ){
+    if(root==NULL){
+        return;
+    }
+    else{
+        m[slope].push_back(root->data); // har slope ke according nnode add krenge
+        pre(root->left ,m ,slope+1);  //jab left me jate h to slope badd jayega diagonal ka
+        pre(root->right ,m ,slope); // right me slope nahi badega diagonal ka
+    }
+}
+vector<int> diagonal(Node *root)
+{
+   vector<int>ans;
+   if(root==NULL)
+   {
+       return ans;
+   }// your code here
+   map<int ,vector<int>>m;
+   pre(root ,m ,0);  //preorder traversal kiya h 
+   
+   for(auto i:m){
+       for(auto j:i.second){
+           ans.push_back(j);
+       }
+   }
+   return ans;
+}
