@@ -7,7 +7,7 @@ public:
     
     void sumpath(Node* root , int &maxsum ,int sum , int len , int &maxlen){
         if(root==NULL){
-            if(len>maxlen)
+            if(len>maxlen) //when reach leaf node next node which is null check full path sum in more then the maxsum and have len greater then the maxlen which is height of that path
             {
                 maxlen = len;
                 maxsum = sum;
@@ -18,7 +18,7 @@ public:
             return;
         }
         else{
-            sum = sum+root->data;
+            sum = sum+root->data; // add current root data
             sumpath(root->left , maxsum, sum ,len+1 ,maxlen);
             sumpath(root->right , maxsum ,sum ,len+1 , maxlen);
             
