@@ -1,0 +1,31 @@
+https://practice.geeksforgeeks.org/problems/k-sum-paths/1/#
+
+
+class Solution{
+  public:
+  void solve(Node* root ,int k ,int &count ,vector<int>v){
+      if(root==NULL){
+          return ;
+      }
+      v.push_back(root->data);
+      solve(root->left, k ,count ,v);
+      solve(root->right, k ,count ,v);
+      
+      int size = v.size();
+      int sum =0;
+      for(int i = size-1 ;i>=0 ;i--){ // harr node pe check krrna ahoga kyonki kahin prr bhi apn ko sum k ke barabr mil sakta h 
+          sum+=v[i];
+          if(sum==k){
+              count++;
+          }
+      }
+      v.pop_back(); // jate time pihcli ndoe hatani h
+  }
+    int sumK(Node *root,int k)
+    {
+       vector<int>v;
+       int count =0;
+       solve(root, k ,count ,v);
+       return count;// code here 
+    }
+};
