@@ -12,14 +12,14 @@ class Solution
            return NULL;
        }//Your code here
        if(root->data==n1 || root->data==n2){
-           return root;
+           return root; // agr node match hui to written kro mtlv target node find ki
        }
        Node * leftnode = lca(root->left , n1 ,n2);
        Node* rightnode = lca(root->right , n1 ,n2);
        if(leftnode!=NULL && rightnode!= NULL){
-           return root;
+           return root; // agr dono node find hui bo ek hi jagah ja krr meet krti h to bahi answer h apna
        }
-       else if(leftnode!=NULL && rightnode== NULL){
+       else if(leftnode!=NULL && rightnode== NULL){  
            return leftnode;
        }
        else if(leftnode==NULL && rightnode!= NULL){
