@@ -1,0 +1,31 @@
+https://practice.geeksforgeeks.org/problems/maximum-sum-of-non-adjacent-nodes/1/#
+
+
+class Solution{
+  public:
+  pair<int ,int>solve(Node* root){
+      if(root==NULL){
+          pair<int ,int>p = make_pair(0,0);
+          return p;
+      }
+      else{
+          pair<int ,int>l = solve(root->left);
+          pair<int ,int>r = solve(root->right);
+          
+          pair<int ,int>p;
+          p.first = root->data + l.second+r.second;
+          p.second = max(l.first ,l.second)+max(r.first ,r.second); //mtlv agr first ko include krke jyada aa raha h sum ya na krke ye kiya dono side
+          return p;
+      }
+  }
+    //Function to return the maximum sum of non-adjacent nodes.
+    int getMaxSum(Node *root) 
+    {
+        if(root==NULL)
+        {
+            return 0;
+        }
+        pair<int ,int>p = solve(root);
+        return max(p.first ,p.second);// Add your code here
+    }
+};
