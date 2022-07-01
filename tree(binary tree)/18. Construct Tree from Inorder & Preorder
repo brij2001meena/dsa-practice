@@ -1,0 +1,35 @@
+https://practice.geeksforgeeks.org/problems/construct-tree-1/1/#
+
+
+class Solution{
+    public:
+    int findininorder(int in[] ,int  el, int n){
+        for(int i = 0 ;i<n;i++){
+            if(in[i]==el){
+                return i;
+            }
+        }
+        return -1;
+    }
+    Node* solve(int in[] , int pre[] ,int &preindex , int instart , int inend ,int n){
+        if(preindex>=n || instart>inend){
+            return NULL;
+        }
+        else{
+            int element = pre[preindex++];
+            Node* root = new Node(element);
+            
+            int inpos = findininorder(in ,element , n);
+            
+            root->left = solve(in ,pre ,preindex ,instart ,inpos-1 ,n);
+            root->right = solve(in ,pre ,preindex ,inpos+1 ,inend ,n);
+            return root;
+        }
+    }
+    Node* buildTree(int in[],int pre[], int n)
+    {
+        int preindex = 0;
+        Node* root = solve(in ,pre ,preindex ,0 ,n-1 ,n);
+        return root;// Code here
+    }
+};
