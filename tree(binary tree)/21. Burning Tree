@@ -1,0 +1,73 @@
+https://practice.geeksforgeeks.org/problems/burning-tree/1#
+
+
+class Solution {
+  public:
+  Node* createmapping(Node* root ,int target ,map<Node* ,Node*>&nodetoparent){
+      queue<Node*>q;
+      q.push(root);
+      Node* res;
+      nodetoparent[root] =NULL;
+      while(!q.empty()){
+          Node* f = q.front();
+          q.pop();
+          if(f->data ==target){
+              res = f;
+          }
+          if(f->left){
+              q.push(f->left);
+              nodetoparent[f->left] = f; // mapp krr rahe h node ko uske parent se taki parent mil sake direct
+          }
+          if(f->right){
+              q.push(f->right);
+              nodetoparent[f->right] = f;
+          }
+      }
+      return res;
+  }
+  
+  int burn(Node* root,map<Node* ,Node*>&nodetoparent){
+      int t =0;
+      queue<Node*>q;
+      map<Node* ,bool>visited; // taki kooi do bar visite na ho
+      q.push(root);
+      visited[root] = 1;
+    
+      while(!q.empty()){
+          
+          bool flag =true;
+          int size = q.size();
+          for(int i = 0;i<size;i++){
+          Node* f = q.front();
+          q.pop();
+          if(f->left && !visited[f->left]){
+              flag = false;
+              q.push(f->left);
+              visited[f->left] = 1;
+          }
+          if(f->right && !visited[f->right]){
+              flag=false;
+              q.push(f->right);
+              visited[f->right] = 1;
+          }
+          if(nodetoparent[f] && !visited[nodetoparent[f]]){
+              flag =false;
+              q.push(nodetoparent[f]);
+              visited[nodetoparent[f]] = 1;
+          }
+          }
+          if(flag==false){
+              t++; //koi new element add hua hoga mtlv ye bali node burn ho gai to ab time increase ho jayega
+          }
+      }
+      return t;
+  }
+    int minTime(Node* root, int target) 
+    {
+       map<Node* , Node*>nodetoparent;
+       Node* tnode =  createmapping(root, target ,nodetoparent);
+       int tm = burn(tnode , nodetoparent);
+       return tm;
+       // Your code goes here
+    }
+};
