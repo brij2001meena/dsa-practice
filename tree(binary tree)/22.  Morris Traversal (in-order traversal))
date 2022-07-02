@@ -1,0 +1,41 @@
+https://leetcode.com/problems/binary-tree-inorder-traversal/submissions/
+
+
+time ->O(n);
+space->O(1); and ini all other traversal O(n);
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int>v;
+        if(root==NULL){
+            return v;
+        }
+        else{
+            TreeNode*curr ,*pre;
+            curr = root;
+            while(curr!=NULL){
+            if(curr->left==NULL){
+                v.push_back(curr->val);
+                curr = curr->right;
+            }
+            else{
+                pre = curr->left;
+                while(pre->right && pre->right!=curr){
+                    pre = pre->right; //finding node with right null orr right points to curr
+                }
+                if(!pre->right){
+                    pre->right = curr; //make link to curr from pre
+                    curr = curr->left; 
+                }
+                else{
+                    pre->right =NULL;//removing link from pre ke right se curr prr;
+                    v.push_back(curr->val);
+                    curr = curr->right;
+                }
+                }
+            }
+        }
+        return v;
+    }
+};
