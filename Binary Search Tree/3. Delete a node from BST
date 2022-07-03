@@ -1,0 +1,51 @@
+https://practice.geeksforgeeks.org/problems/delete-a-node-from-bst/1/#
+
+
+Node *deleteNode(Node *root, int x) {
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    if(root->data==x){
+        //0 child-->
+        if(root->left==NULL && root->right==NULL){
+            delete(root);
+            return NULL;
+        }
+        
+        //1 child-->
+        if(root->left!=NULL && root->right==NULL){
+            Node * temp = root->left;
+            delete(root);
+            return temp;
+        }
+        if(root->left==NULL && root->right!=NULL){
+            Node* temp = root->right;
+            delete(root);
+            return temp;
+        }
+        
+        //2 child-->
+        if(root->left!=NULL && root->right!=NULL){
+            //either found max in left sub tree and replace with root node and then delete the found max node ;
+            //or found min in right sub tree replace with root and delete that min node;
+            Node* temp = root->right;
+            while(temp->left!=NULL){ // finding min in right sub tree
+                temp = temp->left;
+            }
+            root->data = temp->data; // replace with min
+            root->right =  deleteNode(root->right , temp->data); //delete min node
+            return root;
+        }
+        
+    }
+    else if(root->data>x){
+        root->left = deleteNode(root->left , x);
+        return root;
+    }
+    else{
+        root->right =  deleteNode(root->right ,x);
+        return root;
+    }
+    // your code goes here
+}
