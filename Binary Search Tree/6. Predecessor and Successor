@@ -1,0 +1,31 @@
+https://www.codingninjas.com/codestudio/problems/_893049?topList=love-babbar-dsa-sheet-problems&leftPanelTab=1
+https://practice.geeksforgeeks.org/problems/predecessor-and-successor/1/#
+
+pair<int,int> predecessorSuccessor(BinaryTreeNode<int>* root, int key)
+{
+        int succ =-1 ,pre = -1;
+        BinaryTreeNode<int>* t = root;
+        while(t->data!=key){
+            if(t->data>key){
+                succ = t->data;
+                t=t->left;
+            }
+            else {
+                pre = t->data;
+                t= t->right;
+            }
+        }
+        BinaryTreeNode<int>* temp = t->left;
+        while(temp!=NULL){
+            pre = temp->data;
+            temp = temp->right; //key node se chota lekin baki left se bada type ka
+        }
+        BinaryTreeNode<int>* temp2 = t->right;
+        while(temp2!=NULL){
+            succ = temp2->data;
+            temp2 =temp2->left; //key node se bada lekin baki node se chota type ka
+        }
+       pair<int ,int>ans = make_pair(pre ,succ);
+       return ans;
+        // Write your code here.
+}
