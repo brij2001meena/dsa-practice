@@ -1,0 +1,31 @@
+https://practice.geeksforgeeks.org/problems/normal-bst-to-balanced-bst/1/#
+https://www.codingninjas.com/codestudio/problems/normal-bst-to-balanced-bst_920472?leftPanelTab=1
+
+void in(Node* root ,vector<int>&v){
+    if(root==NULL){
+        return ;
+    }
+    else{
+        in(root->left , v);
+        v.push_back(root->data); // find inorder which is sorted order
+        in(root->right,v);
+    }
+}
+Node* normaltobalanced(int s ,int e,vector<int>&v){
+    if(s>e){
+        return NULL;
+    }
+    int mid = (s+e)/2;
+    Node* root = new Node(v[mid]); // make mid node 
+    root->left = normaltobalanced(s ,mid-1 ,v); //call left
+    root->right = normaltobalanced(mid+1 ,e ,v); //call right
+    return root;
+}
+Node* buildBalancedTree(Node* root)
+{
+    vector<int>v;
+    in(root ,v);
+    int s = 0;
+    int e = v.size()-1;
+    return normaltobalanced(s ,e ,v);	// Code here
+}
