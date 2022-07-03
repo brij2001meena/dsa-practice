@@ -1,0 +1,19 @@
+https://practice.geeksforgeeks.org/problems/check-for-bst/1/#
+https://www.codingninjas.com/codestudio/problems/validate-bst_799483?leftPanelTab=1
+
+bool bst(BinaryTreeNode<int>*root ,int min , int max){
+        if(root==NULL){
+            return true;
+        }
+        if(root->data>=min && root->data<=max){ // root node sahi h to ab left me check kro then right me dono sahi to sab sahi 
+            bool left = bst(root->left ,min , root->data);
+            bool right = bst(root->right , root->data , max);
+            if(left && right){
+                return true;
+            }
+        }
+        return false;
+    }
+bool validateBST(BinaryTreeNode<int> *root) {
+    return bst(root ,INT_MIN ,INT_MAX);// Write your code here
+}
