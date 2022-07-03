@@ -1,0 +1,32 @@
+https://www.codingninjas.com/codestudio/problems/flatten-bst-to-a-sorted-list_1169459?leftPanelTab=0
+https://leetcode.com/problems/flatten-binary-tree-to-linked-list/submissions/
+
+void in(TreeNode<int>* root ,vector<int>&v){
+        if(root==NULL){
+            return ;
+        }
+        else{
+            in(root->left , v);
+            v.push_back(root->data); // find inorder which is sorted order
+            in(root->right,v);
+        }
+    }
+TreeNode<int>* flatten(TreeNode<int>* root)
+{
+    vector<int>v;
+    in(root ,v);
+    int size  =v.size();
+    TreeNode<int>* newroot = new TreeNode<int>(v[0]);
+    TreeNode<int>* curr = newroot;
+    for(int i = 1;i<size;i++)
+    {
+        TreeNode<int>* temp = new TreeNode<int>(v[i]);
+        curr->right = temp;
+        curr->left = NULL;
+        curr= temp;
+    }
+    curr->left = NULL;
+    curr->right = NULL;
+    return newroot;
+        // Write your code here
+}
