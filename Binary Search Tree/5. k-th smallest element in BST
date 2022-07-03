@@ -1,6 +1,9 @@
 https://practice.geeksforgeeks.org/problems/find-k-th-smallest-element-in-bst/1
 https://www.codingninjas.com/codestudio/problems/find-k-th-smallest-element-in-bst_1069333?leftPanelTab=0
 
+
+we can solve it using morrish traversal as well with space complexity O(1);
+
 class Solution {
   public:
     int small(Node *root, int k ,int &i){
