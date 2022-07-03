@@ -1,0 +1,23 @@
+https://www.codingninjas.com/codestudio/problems/preorder-traversal-to-bst_893111?leftPanelTab=1
+https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/submissions/
+
+BinaryTreeNode<int>*create(vector<int>&preorder , int min ,int max ,int &i){
+    if(i>=preorder.size())
+    {
+        return NULL;
+    }
+    if(preorder[i]< min || preorder[i]>max)
+    {
+        return NULL;
+    }
+    BinaryTreeNode<int>*root = new BinaryTreeNode<int>(preorder[i++]);
+    root->left = create(preorder ,min ,root->data ,i);
+    root->right = create(preorder ,root->data ,max ,i);
+    return root;
+}
+BinaryTreeNode<int>* preorderToBST(vector<int> &preorder) {
+    int mini = INT_MIN;
+    int maxi = INT_MAX;
+    int i =0;
+    return create(preorder ,mini ,maxi ,i);// Write your code here.
+}
