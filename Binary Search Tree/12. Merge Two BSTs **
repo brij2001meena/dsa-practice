@@ -1,0 +1,200 @@
+https://www.codingninjas.com/codestudio/problems/h_920474?leftPanelTab=0&utm_source=youtube&utm_medium=affiliate&utm_campaign=Lovebabbar
+https://practice.geeksforgeeks.org/problems/merge-two-bst-s/1/#
+
+approach 1->
+//tc =O(m+n);
+//sc=O(h1+h2);
+class Solution
+{
+    public:
+    //Function to return a list of integers denoting the node 
+    //values of both the BST in a sorted order.
+    Node* makedll(Node*root , Node*&head) // make dll from the trees
+    {
+        if(root==NULL){
+            return NULL;
+        }
+        makedll(root->right , head);//make right sub tree tree  and return its head
+        root->right = head; 
+        if(head!=NULL){
+            head->left = root;
+        }
+        head = root;
+        makedll(root->left , head); // make left sub tree dll
+    }
+    
+    Node* mergedll(Node*h1 , Node*h2){ //merge the two dll and make single sorted dll
+        Node*head = NULL;
+        Node*tail = NULL;
+        while(h1!=NULL && h2!=NULL){
+            if(h1->data<h2->data){
+                if(head==NULL){
+                    head=h1;
+                    tail = h1;
+                    head->left=NULL;
+                    h1 = h1->right;
+                }
+                else{
+                    tail->right = h1;
+                    h1->left = tail;
+                    tail = h1;
+                    h1= h1->right;
+                }
+            }
+            else{
+                if(head==NULL){
+                    head=h2;
+                    tail = h2;
+                    head->left=NULL;
+                    h2 = h2->right;
+                }
+                else{
+                    tail->right = h2;
+                    h2->left = tail;
+                    tail = h2;
+                    h2= h2->right;
+                }
+                
+            }
+        }
+        
+        while(h1!=NULL){
+            tail->right = h1;
+            h1->left =tail;
+            tail =h1;
+            h1 = h1->right;
+        }
+        while(h2!=NULL){
+            tail->right = h2;
+            h2->left =tail;
+            tail =h2;
+            h2 = h2->right;
+        }
+        return head;
+    }
+    
+    int countnodes(Node*head){ //counts node in dll
+        
+            int count =0;
+            Node*t = head;
+            while(t!=NULL){
+                count++;
+                t= t->right;
+            }
+            return count;
+        
+    }
+    
+    Node* maketree(Node* &head , int n){ // make tree from the merged dll and return root of tree;
+        if(n<=0 ||head==NULL){
+            return NULL;
+        }
+        else{
+            Node*left = maketree(head , n/2); // make first n/2 left sub tree
+            Node*root= head;
+            root->left = left; // make mid node root
+            head = head->right;
+            root->right =  maketree(head ,n-n/2-1); //make other nodes right sub tree;
+            return root;
+        }
+        
+    }
+    
+    void in(Node* root ,vector<int>&v){
+    if(root==NULL){
+        return ;
+    }
+    else{
+        in(root->left , v);
+        v.push_back(root->data); // find inorder which is sorted order
+        in(root->right,v);
+    }
+}
+    vector<int> merge(Node *root1, Node *root2)
+    {
+      Node*h1 = NULL;
+      makedll(root1 ,h1);
+      h1->left = NULL;
+       
+      Node*h2 = NULL;
+      makedll(root2 ,h2);
+      h2->left =NULL;
+       
+       
+      Node* head = mergedll(h1 ,h2);
+       
+       
+      Node*root = maketree(head ,countnodes(head));
+       
+       return root;
+      //vector<int>v;
+      //in(root ,v);
+      //return v;
+      //Your code here
+    }
+};
+
+
+
+
+
+
+approach 2->
+//this solution has tc->O(M+N);
+//and SC->O(M+N);
+
+void in(TreeNode<int> *root ,vector<int>&v){
+    if(root==NULL){
+        return ;
+    }
+    else{
+        in(root->left , v);
+        v.push_back(root->data); // find inorder which is sorted order
+        in(root->right,v);
+    }
+}
+void merge(vector<int>&v1 ,vector<int>&v2 ,vector<int>&v){
+    int i = 0 ,j = 0;
+    int n = v1.size();
+    int m = v2.size();
+    int k=0;
+    while(i<n && j<m){
+        if(v1[i]<v2[j]){
+            v[k++] = v1[i++];
+        }
+        else{
+            v[k++] = v2[j++];
+        }
+    }
+    while(i<n){
+        v[k++] = v1[i++];
+    }
+    while(j<m){
+        v[k++] = v2[j++];
+    }
+}
+TreeNode<int> * normaltobalanced(int s ,int e,vector<int>&v){
+    if(s>e){
+        return NULL;
+    }
+    int mid = (s+e)/2;
+   TreeNode<int> * root = new TreeNode<int>(v[mid]); // make mid node 
+    root->left = normaltobalanced(s ,mid-1 ,v); //call left
+    root->right = normaltobalanced(mid+1 ,e ,v); //call right
+    return root;
+}
+TreeNode<int> *mergeBST(TreeNode<int> *root1, TreeNode<int> *root2){
+    vector<int>v1;
+    in(root1 ,v1);
+    
+    vector<int>v2;
+    in(root2 ,v2);
+    
+    vector<int>v(v1.size()+v2.size());
+    merge(v1 ,v2 ,v);
+    
+    int s = 0;
+    int e = v.size()-1;
+    return normaltobalanced(s ,e ,v);
+    // Write your code here.
+}
