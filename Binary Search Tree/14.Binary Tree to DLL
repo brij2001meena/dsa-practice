@@ -1,0 +1,28 @@
+https://practice.geeksforgeeks.org/problems/binary-tree-to-dll/1
+
+
+class Solution
+{
+    public: 
+     Node* makedll(Node*root , Node*&head) // make dll from the trees
+    {
+        if(root==NULL){
+            return NULL;
+        }
+        makedll(root->right , head);//make right sub tree tree  and return its head
+        root->right = head; 
+        if(head!=NULL){
+            head->left = root;
+        }
+        head = root;
+        makedll(root->left , head); // make left sub tree dll
+    }
+    //Function to convert binary tree to doubly linked list and return it.
+    Node * bToDLL(Node *root)
+    {
+      Node*h1 = NULL;
+      makedll(root ,h1);
+      h1->left = NULL; 
+      return h1;// your code here
+    }
+};
