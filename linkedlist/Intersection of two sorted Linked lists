@@ -1,0 +1,40 @@
+https://practice.geeksforgeeks.org/problems/intersection-of-two-sorted-linked-lists/1?page=1&category[]=Linked%20List&curated[]=7&sortBy=submissions
+
+
+Node* findIntersection(Node* head1, Node* head2)
+{
+    Node* t1 = head1;
+    Node* t2 = head2;
+    while(t1->data!=t2->data) ///  first find the first comman element
+    {
+        if(t1->data>t2->data)
+        {
+            t2 = t2->next;
+        }
+        else{
+            t1 = t1->next;
+        }
+    }
+    
+    Node* n = new Node(t1->data); // make new node with the commman data
+    Node* g = n;
+    t1 =t1->next;
+    t2 =t2->next;
+    
+    while(t1!=NULL && t2!=NULL){
+        if(t1->data==t2->data){
+            Node* t = new Node(t1->data); // create new node for each subsequent comman data
+            g->next =t; // attach new node to the previu=ous new linked list
+            g= g->next;
+            t1 =t1->next;
+            t2 =t2->next;
+        }
+        else if(t1->data>t2->data){
+            t2 =t2->next;
+        }
+        else{
+             t1=t1->next;
+        }
+    }
+    return n;
+}
