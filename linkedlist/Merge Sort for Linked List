@@ -1,0 +1,72 @@
+https://practice.geeksforgeeks.org/problems/sort-a-linked-list/1?page=1&category[]=Linked%20List&curated[]=7&sortBy=submissions
+
+
+Node* findmid(Node* head)
+    {
+        Node*fast = head->next;
+        Node*slow = head;
+        while(fast!=NULL && fast->next!=NULL) // finding mid 
+        {
+            fast = fast->next->next;
+            slow=slow->next;
+        }
+        return slow;
+    }
+    
+    Node* merge(Node* left , Node* right){
+        Node* ans = new Node(-1); // create fist node for the sorted linked list
+        Node* result = ans;
+        if(left==NULL) 
+        {
+            return right;
+        }
+        if(right==NULL)
+        {
+            return left;
+        }
+        while(left!=NULL && right!=NULL)
+        {
+            if(left->data<right->data) // left data small then add it to the rsulted linked list
+            {
+                result->next =left;
+                result =left;
+                left = left->next;
+            }
+            else{
+                result->next= right;
+                result =right;
+                right =right->next;
+            }
+        }
+        
+        while(left!=NULL)
+        {
+            result->next =left;
+            result= left;
+            left =left->next;
+        }
+        while(right!=NULL)
+        {
+            result->next =right;
+            result= right;
+            right =right->next;
+        }
+        ans= ans->next;
+        return ans;
+        
+        }
+    Node* mergeSort(Node* head) {
+        if(head==NULL || head->next==NULL) // if ther is only one node or no node
+        {
+            return head;
+        }
+        Node* left = head;
+        Node* mid  = findmid(head); // find mid using fast and slow concept
+        Node* right = mid->next; // next part of linked list
+        mid->next = NULL;
+        left = mergeSort(left); // divide left part
+        right = mergeSort(right); // divide right part
+        Node* result = merge(left ,right); //merge the left and right in sorted manner
+        return result;
+        // your code here
+    }
