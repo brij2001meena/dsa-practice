@@ -1,0 +1,47 @@
+https://practice.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1?page=1&difficulty[]=0&category[]=Linked%20List&curated[]=7&sortBy=submissions
+
+
+
+class Solution
+{
+    public:
+    int add(Node* head)
+    {
+        if(head->next==NULL)
+        {
+            int d = head->data;
+            d =d+1;
+            int c = d/10;
+            d = d%10;
+            head->data = d;
+            return c;
+        }
+            int c = add(head->next);
+            int d = head->data;
+            d = d+c;
+            c = d/10;
+            d = d%10;
+            head->data = d;
+            return c;
+    }
+    Node* addOne(Node *head) 
+    {
+        if(head!=NULL)
+        {
+            int c = add(head);
+            if(c>=1)
+            {
+                Node* temp = new Node(c);
+                // temp->data = c;
+                temp->next = head;
+                head = temp;
+                return head;
+            }
+            return head;
+        }
+        head->data = head->data+1;
+        return head;
+        // Your Code here
+        // return head of list after adding one
+    }
+};
