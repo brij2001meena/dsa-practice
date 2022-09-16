@@ -1,0 +1,25 @@
+https://practice.geeksforgeeks.org/problems/detect-loop-in-linked-list/1?page=1&difficulty[]=0&category[]=Linked%20List&curated[]=7&sortBy=submissions
+https://leetcode.com/problems/linked-list-cycle/submissions/
+
+
+bool detectLoop(Node* head)
+    {
+        Node* c = head;
+        Node* f = head->next;
+        while(f!=c && f!=NULL)
+        {
+            c = c->next;
+            if(f->next!=NULL) // check for current node ka next kahi null to nahi nahi to apn segment fault me aa jeynege agr next ka next krenge to
+            {
+                f= f->next->next;
+            }
+            else{
+                return false;
+            }
+        }
+        if(f==NULL)
+        {
+            return false;
+        }
+        return true;
+    }
