@@ -1,0 +1,31 @@
+https://practice.geeksforgeeks.org/problems/reverse-a-linked-list/1?page=1&difficulty[]=0&category[]=Linked%20List&curated[]=7&sortBy=submissions
+https://leetcode.com/problems/reverse-linked-list/
+
+
+struct Node* reverseList(struct Node *head)
+    {
+        if(head==NULL || head->next==NULL)
+        {
+            return head;
+        }
+        struct Node*rest = reverseList(head->next); 
+        head->next->next = head;
+        
+        head->next =NULL;
+        return rest;
+        
+        //********************************************//
+        // struct Node* prev = NULL;
+        // struct Node* curr = head;
+        // struct Node* post = head->next;
+        // while(post!=NULL)
+        // {
+        //     curr->next = prev;
+        //     prev = curr;
+        //     curr = post;
+        //     post = post->next;
+        // }
+        // curr->next = prev;
+        // return curr;// code here
+        // return head of reversed list
+    }
