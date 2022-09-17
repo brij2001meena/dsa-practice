@@ -54,6 +54,17 @@ Node* findmid(Node* head)
         ans= ans->next;
         return ans;
         
+        // we can also do this
+        //if(left!=NULL && right==NULL)
+        //    {
+        //        result->next = left;
+        //    }
+        //    if(left==NULL &&right!=NULL)
+        //    {
+        //        result->next = right;
+        //    }
+        //    return ans->next;
+        
         }
     Node* mergeSort(Node* head) {
         if(head==NULL || head->next==NULL) // if ther is only one node or no node
