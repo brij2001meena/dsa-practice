@@ -1,0 +1,90 @@
+https://leetcode.com/problems/reverse-nodes-in-k-group/
+
+
+
+
+// by finding length and then number group can be possible
+class Solution {
+public:
+    ListNode* reverse(ListNode*head , int k ,int j)
+    {
+        if(j==0)
+        {
+            return head;
+        }
+       ListNode* s = head;
+       ListNode* f = head->next;
+       ListNode* prev =NULL;
+       int i =0;
+       while(s!=NULL && i<k)
+       {
+           s->next = prev;
+           prev=s;
+           s =f;
+           if(f!=NULL)
+           {
+               f =f->next;
+           }
+           i++;
+       }
+       if(s!=NULL)
+       {
+           head->next = reverse(s ,k , --j);
+       }
+       return prev;
+    }
+    ListNode* reverseKGroup(ListNode* head, int k) {
+        ListNode* s = head;
+        int size =0;
+        while(s!=NULL)
+        {
+            s = s->next;
+            size++;
+        }
+            int j = size/k;
+            return reverse(head , k , j);
+        
+    }
+};
+
+
+
+
+// by checking each time that size(k) is possible or not
+class Solution {
+public:
+    ListNode* reverseKGroup(ListNode* head, int k) {
+         ListNode* curr = head;
+        ListNode*prev = NULL;
+        ListNode*fast = head->next;
+        int i = 0;
+        while(i!=k && curr!=NULL)
+        {
+            curr = curr->next;
+            i++;
+        }
+        if(i!=k)
+        {
+            return head;
+        }
+        i =0;
+        curr =head;
+        while(curr!=NULL && i<k)
+        {
+            curr->next = prev;
+            prev = curr;
+            curr =fast;
+            if(fast!=NULL)
+            {
+                fast = fast->next;
+            }
+            i++;
+        }
+        if(curr!=NULL)
+        {
+            head->next = reverseKGroup(curr , k);;
+        }
+            return prev;
+        
+    }
+};
