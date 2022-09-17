@@ -1,0 +1,64 @@
+https://practice.geeksforgeeks.org/problems/flattening-a-linked-list/1?page=1&difficulty[]=1&category[]=Linked%20List&curated[]=7&sortBy=submissions
+
+
+
+
+
+/* Node structure  used in the program
+
+struct Node{
+	int data;
+	struct Node * next;
+	struct Node * bottom;
+	
+	Node(int x){
+	    data = x;
+	    next = NULL;
+	    bottom = NULL;
+	}
+	
+};
+*/
+
+/*  Function which returns the  root of 
+    the flattened linked list. */
+Node *flatten(Node *root)
+{
+   Node* s = root;
+   Node* b = root;
+   struct Node *head = new Node(b->data);
+   Node* prev = head;
+   b = b->bottom;
+   head->next = NULL;
+   while(s!=NULL) //first we make likedlist with bottom pointer and make next pointer null
+   {
+       while(b!=NULL)
+       {
+           struct Node *temp = new Node(b->data);
+           prev->bottom = temp;
+           prev = temp;
+           b = b->bottom;
+           temp->next = NULL;
+       }
+       s = s->next;
+       b = s;
+   }
+   s = head;
+   while(s->bottom!=NULL) // now we are sorting the linkedlist
+   {
+       b = s->bottom;
+       while(b!=NULL)
+       {
+           if(s->data > b->data)
+           {
+               int t = s->data;
+               s->data = b->data;
+               b->data = t;
+           }
+           b= b->bottom;
+       }
+       s = s->bottom;
+   }
+   return head;
+   // Your code here
+}
