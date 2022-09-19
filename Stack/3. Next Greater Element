@@ -1,0 +1,43 @@
+https://practice.geeksforgeeks.org/problems/next-larger-element-1587115620/1?page=1&difficulty[]=1&category[]=Stack&curated[]=7&sortBy=submissions
+
+
+
+class Solution
+{
+    public:
+    //Function to find the next greater element for each element of the array.
+    vector<long long> nextLargerElement(vector<long long> arr, int n){
+         vector<long long >v(n);
+         stack<long long>s;
+         int j =n;
+         for(int i =n-1;i>=0;i--)
+         {
+             if(s.empty()) // if empty means no one is greater so -1
+             {
+                 v[--j] = -1;
+                 s.push(arr[i]);
+             }
+             else if(s.top()>arr[i]) // means number on right is greater than current number at i 
+             {
+                 v[--j] = s.top();
+                 s.push(arr[i]);
+             }
+             else{
+                 while(!s.empty() && s.top()<=arr[i]) // find the next greater element in the stack
+                 {
+                     s.pop();
+                 }
+                 if(s.empty())
+                 {
+                     v[--j]=-1; // if not found greater number than -1
+                     s.push(arr[i]);
+                 }
+                 else{
+                     v[--j] = s.top();
+                     s.push(arr[i]);
+                 }
+             }
+         }
+         return v;
+    }
+};
