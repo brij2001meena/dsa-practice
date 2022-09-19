@@ -1,0 +1,57 @@
+https://practice.geeksforgeeks.org/problems/max-rectangle/1?page=1&difficulty[]=1&category[]=Stack&curated[]=7&sortBy=submissions
+
+
+
+class Solution{
+  public:
+  int hiest(int arr[] , int m){
+      int tp;
+      int ca= 0;
+      int ma = 0;
+      stack<int>s;
+      int i;
+      for(i = 0 ;i< m;i)
+      {
+          if(s.size()==0 || arr[s.top()]<=arr[i])
+          {
+              s.push(i++); // fill till element found in array whicch smaller than element at index stack ke top bale se 
+          }
+          else{
+              tp = s.top(); // element found smaller thana stack top index element so remove and calculate current area
+              s.pop();
+              ca = arr[tp]*(s.empty()?i:i-s.top()-1);
+              if(ma<ca)
+              {
+                  ma =ca;
+              }
+          }
+      }
+      while(!s.empty()) // till stack not empty find the area
+      {
+          tp = s.top();
+          s.pop();
+          ca = arr[tp]*(s.empty()?i:i-s.top()-1);
+          if(ma<ca){
+              ma = ca;
+          }
+      }
+      return ma;
+  }
+    int maxArea(int arr[MAX][MAX], int n, int m) {
+        int ans = hiest(arr[0], m);
+        for(int i =1 ; i<n;i++)
+        {
+            for(int j =0 ;j<m;j++) // update current row  by summing it with previous row element to find max area in the end
+            {
+                if(arr[i][j])
+                {
+                    arr[i][j] = arr[i][j] + arr[i-1][j];
+                }
+            }
+            
+            ans = max(ans , hiest(arr[i] , m));
+        }
+        return ans;
+        // Your code here
+    }
+};
