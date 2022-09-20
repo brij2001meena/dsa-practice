@@ -1,0 +1,40 @@
+https://practice.geeksforgeeks.org/problems/fab3dbbdce746976ba35c7b9b24afde40eae5a04/1?page=1&difficulty[]=1&category[]=Stack&curated[]=7&sortBy=submissions
+
+
+
+class Solution{
+    
+    public:
+    vector<int> help_classmate(vector<int> arr, int n) 
+    { 
+        vector<int>v(n);
+        stack<int>s;
+        int j = n;
+        for(int i= n-1 ;i>=0;i--)
+        {
+            if(s.empty())
+            {
+                v[i] = -1;
+            }
+            else if(!s.empty() && s.top()<arr[i]) // if top small means tsudent is found then add that to vector
+            {
+                v[i] = s.top();
+            }
+            else if(!s.empty() && s.top()>=arr[i]){ // means student to teach is not find find using while loop 
+                while(!s.empty() && s.top()>=arr[i])
+                {
+                    s.pop();
+                }
+                if(s.empty())
+                {
+                    v[i] =-1;
+                }
+                else{
+                    v[i] = s.top();
+                }
+            }
+            s.push(arr[i]); // each time add current element in the stack
+        }
+        return v;// Your code goes here
+    } 
+};
