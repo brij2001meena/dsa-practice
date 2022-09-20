@@ -1,0 +1,44 @@
+https://practice.geeksforgeeks.org/problems/first-negative-integer-in-every-window-of-size-k3345/1?page=1&difficulty[]=0&category[]=Queue&curated[]=7&sortBy=submissions
+
+
+
+vector<long long> printFirstNegativeInteger(long long int arr[],
+                                             long long int n, long long int k) {
+       
+    vector<long long>v;
+    queue<long long >q;
+    for(int i = 0 ;i<k;i++)
+    {
+      if(arr[i]<0)
+      {
+          q.push(arr[i]);   // find negative first in first window
+      }
+    }
+    
+    int st =0;
+    int end=  k-1;
+    while(end<n)
+    {
+        if(q.empty()) // if empty means in window no negative number
+        {
+            v.push_back(0);
+            st++ ; end++;
+        }
+        else{
+            v.push_back(q.front()); // means element in queue is negative of window
+            if(arr[st]==q.front()) // if first element of window then pop othervise that element is also negative for next window
+            {
+                q.pop();
+            }
+            st++; end++;
+        }
+        if(end!=n && arr[end]<0) // check last elment next pointed by updated end  of each window is negative then add to queue
+        {
+            q.push(arr[end]);
+        }
+    }
+       
+       return v;
+       
+                                                 
+ }
