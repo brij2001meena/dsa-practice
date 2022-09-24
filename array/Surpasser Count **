@@ -1,0 +1,65 @@
+https://practice.geeksforgeeks.org/problems/surpasser-count0615/1?page=3&status[]=unsolved&company[]=Amazon&company[]=Microsoft&company[]=Flipkart&company[]=Adobe&company[]=Google&company[]=Samsung&company[]=Accolite&company[]=MakeMyTrip&company[]=Zoho&company[]=Snapdeal%20&company[]=Paytm&company[]=Morgan%20Stanley&company[]=Goldman%20Sachs&company[]=Walmart&company[]=OYO%20Rooms&company[]=D-E-Shaw&company[]=FactSet&company[]=Ola%20Cabs&company[]=Oracle&company[]=MAQ%20Software&company[]=SAP%20Labs&company[]=Hike&company[]=VMWare&company[]=Qualcomm&company[]=Facebook&company[]=Cisco&company[]=Intuit%20&company[]=Visa&company[]=Directi&company[]=Linkedin&company[]=Payu&company[]=Wipro&company[]=BankBazaar&company[]=Salesforce&company[]=Citrix&company[]=Codenation&company[]=TCS&company[]=24*7%20Innovation%20Labs&company[]=Twitter&company[]=PayPal&company[]=InMobi&company[]=Yatra.com&company[]=CouponDunia&company[]=Myntra&company[]=Atlassian&sortBy=accuracy
+
+
+
+class Solution{
+public:
+void mergesort(int arr[] ,int  l , int r ,unordered_map<int ,int>&m )
+{
+    if(l<r)
+    {
+        int mid = (l+r)/2;
+        mergesort(arr ,l ,mid ,m);
+        mergesort(arr ,mid+1 ,r ,m);
+        merge(arr ,l ,r ,mid ,m);
+    }
+}
+void merge(int arr[] ,int  l , int r ,int mid,unordered_map<int ,int>&m )
+{
+    int i , j ,k;
+    i = l; j = mid+1 ;k = l;
+    int temp[2*mid+1];
+    int c=0;
+    while(i<=mid && j<=r)
+    {
+        if(arr[i]<=arr[j])
+        {
+            m[arr[i]]+=c;
+            temp[k++] = arr[i++];
+        }
+        else{
+            temp[k++] = arr[j++]; // incrementing inversion (c)count such the element is at wrong place from that of if it is sorted
+            c++;
+        }
+    }
+    while(i<=mid)
+    {
+        m[arr[i]]+=c;
+        temp[k++] = arr[i++]; 
+    }
+    while(j<=r)
+    {
+        temp[k++] = arr[j++];
+    }
+    for(int i =l;i<=r ;i++)
+    {
+        arr[i] = temp[i];
+    }
+}
+    vector<int> findSurpasser(int arr[], int n) {
+        unordered_map<int ,int>m;
+        int duplicate[n+1];
+        for(int i = 0 ;i<n;i++)
+        {
+            duplicate[i] = arr[i];
+        }
+        mergesort(duplicate ,0 ,n-1 ,m);
+        
+        vector<int>v;
+        for(int i= 0 ;i< n;i++)
+        {
+            v.push_back(n-i-1-m[arr[i]]); 
+        }
+        return v;
+    }
+};
