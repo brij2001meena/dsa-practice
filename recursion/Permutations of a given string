@@ -1,0 +1,34 @@
+https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1?page=1&difficulty[]=1&category[]=Recursion&curated[]=7&sortBy=submissions
+
+
+
+class Solution
+{
+	public:
+	void permu(string s ,int l ,int r ,set<string>&st)
+	{
+	    if(l==r) 
+	    {
+	        st.insert(s);
+	    }
+	    else{
+	        for(int i = l ; i<=r ;i++)
+	        {
+	            swap(s[i] ,s[l]); 
+	            permu(s ,l+1,r ,st);
+	            swap(s[i],s[l]);
+	        }
+	    }
+	}
+		vector<string>find_permutation(string s)
+		{
+		    set<string>st; // set for single repeition of strings like aab and aab come only once
+		    permu(s ,0 ,s.length()-1 ,st);
+		    vector<string>v;
+		    for(auto it = st.begin(); it != st.end(); it++)
+		    {
+		        v.push_back(*it);
+		    }
+		    return v;// Code here there
+		}
+};
