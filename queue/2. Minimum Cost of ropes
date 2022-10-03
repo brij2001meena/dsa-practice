@@ -2,20 +2,22 @@ https://practice.geeksforgeeks.org/problems/minimum-cost-of-ropes-1587115620/1?p
 
 
 
-priority_queue<long long, vector<long long>,
-                                greater<long long> > q ; // with its help we sort in increasing order
-                for(long long i = 0 ; i<n ; i++)
-                {
-                    q.push(arr[i]);
-                }
-                long long sum =0;
+long long minCost(long long arr[], long long n) {
+        
+        priority_queue<long long ,vector<long long> ,greater<long long >>q; sort in asscending order
+        for(long long i = 0 ; i<n ; i++)
+            {
+                q.push(arr[i]);
+            }
+        long long sum =0;
         while(q.size()!=1){
             long long a = q.top();
             q.pop();
             long long b = q.top();
             q.pop();
             long long c = a+b;
-            q.push(c); // input in sorted order;
+            q.push(c);
             sum+=c;
         }
         return sum;
+    }
