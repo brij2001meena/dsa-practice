@@ -5,7 +5,7 @@ class Solution {
 public:
     void per(vector<vector<int>>&ans , int i , vector<int>&nums)
     {
-        if(i>=nums.size())
+        if(i>=nums.size())// size ke barabar ho jaye jab aai
         {
             ans.push_back(nums);
         }
@@ -13,9 +13,9 @@ public:
             
             for(int j = i ;j<nums.size(); j++)
             {
-                swap(nums[i] , nums[j]);
-                per(ans  , i+1 , nums);
-                swap(nums[i], nums[j]);
+                swap(nums[i] , nums[j]); // swap current element with jth element
+                per(ans  , i+1 , nums);//call to permuted next characters
+                swap(nums[i], nums[j]);// agaiin to back to intital postion
             }
         }
     }
