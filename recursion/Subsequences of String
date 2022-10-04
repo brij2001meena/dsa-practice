@@ -1,15 +1,15 @@
 https://www.codingninjas.com/codestudio/problems/subsequences-of-string_985087?leftPanelTab=1&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_16
 
 void sub(string str , vector<string>&ans , string t ,int i){
-    if(i>=str.size()){
-        if(t.size()>=1){
+    if(i>=str.size()){ // isse check krr rahe h ki last char tak pahunche ke nahi
+        if(t.size()>=1){ // isse check krr rahe h ki last tak pahucnhee to h but ko char add kiya new string t me ya nahi
             ans.push_back(t);
         }
     }
     else{
-        sub(str , ans , t ,i+1);
-        t+=str[i];
-        sub(str ,ans ,t ,i+1);
+        sub(str , ans , t ,i+1); // last tak le jaega
+        t+=str[i]; // current char add krenge
+        sub(str ,ans ,t ,i+1); // usse add krne ke bad fir next char prr jaenge
     }
 }
 vector<string> subsequences(string str){
