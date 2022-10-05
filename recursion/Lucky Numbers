@@ -15,7 +15,7 @@ bool lucky(int n , int nremove){
            }
            else{
                n = (n-n/nremove); // find the new position of element because elemtn before this are removed
-               nremove++;
+               nremove++;         //isme ye hi ki element isse pahle jis position prr tha ab usse pahle ke nikal gae to bo ab new position prr aa gaya ab check krna h ki iss nahi position prr h bo deletge hoga ya nahi
                return lucky(n ,nremove);
            }
        }
