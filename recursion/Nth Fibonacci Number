@@ -1,0 +1,28 @@
+https://practice.geeksforgeeks.org/problems/nth-fibonacci-number1335/1
+
+
+class Solution {
+  public:
+  long long int fib(long long int n ,long long int dp[])
+  {
+      if(n<=1)
+      {
+          dp[n]=1;
+          return dp[n];
+      }
+      if(dp[n]!=-1)
+      {
+          return dp[n]; // if we found solution already for that then we just place directly
+      }
+      dp[n] = (fib(n-1,dp)+fib(n-2,dp))%1000000007;
+      return dp[n];
+  }
+    long long int nthFibonacci(long long int n){
+       long long int dp[n];
+       memset(dp ,-1,sizeof dp); // it set or copy -1 to the dp array
+       return fib(n-1 ,dp); 
+    // here i use countofways to climb stairs problme idea where 
+    //   ways(2) = fib(3) and ways(3) = fib(4)and so on 
+    //   so i juts reduce the fibonacci number to be found i found the number of ways of n-1 which is fibonacci of n
+    }
+};
