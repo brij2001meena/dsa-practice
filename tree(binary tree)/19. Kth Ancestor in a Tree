@@ -1,0 +1,51 @@
+https://practice.geeksforgeeks.org/problems/kth-ancestor-in-a-tree/1
+
+
+
+
+Node* solve(Node*root , int &k ,int node)
+{
+    if(root==NULL)
+    {
+        return NULL;
+    }
+    if(root->data==node) // if found return root;
+    {
+        return root;
+    }
+    
+    Node* l = solve(root->left , k ,node); // find in left
+    Node* r = solve(root->right ,k ,node);  //find in right
+    
+    if(l!=NULL && r==NULL)
+    {
+        k--;
+        if(k<=0) // if k==0 then this node is kth ancester return it
+        {
+            k = INT_MAX; // make it max so that further any node is not claimed as ancester
+            return root;
+        }
+            return l;
+    }
+    else if(l==NULL && r!=NULL)
+    {
+        k--;
+        if(k<=0)
+        {
+            k = INT_MAX;
+            return root;
+        }
+            return r;
+    }
+    return NULL;
+    
+}
+int kthAncestor(Node *root, int k, int node)
+{
+    Node* ans = solve(root ,k ,node);
+    if(ans==NULL || ans->data==node)
+    {
+        return -1;
+    }
+    return ans->data;
+}
