@@ -1,0 +1,64 @@
+https://practice.geeksforgeeks.org/problems/is-binary-tree-heap/1
+
+
+
+class Solution {
+  public:
+  int counttotal(struct Node* root)
+  {
+      if(root==NULL)
+      {
+          return 0;
+      }
+      return counttotal(root->left) + counttotal(root->right)+1;
+  }
+  
+  bool iscbt(struct Node* root , int i , int n)
+  {
+      if(root== NULL)
+      {
+          return true;
+      }
+      if(i>=n) //  if index is grater than the total node present means some node are missed while filling from left to right
+      {
+          return false;
+      }
+      bool left = iscbt(root->left , 2*i+1 , n);
+      bool right = iscbt(root->right ,2*i+2 , n);
+      
+      return left && right;
+
+  }
+  
+  bool maxx(struct Node* root)
+  {
+      if(root==NULL || (root->left==NULL && root->right==NULL)) 
+      {
+          return true;
+      }
+      if(root->left!=NULL && root->right==NULL)
+      {
+          return root->data > root->left->data;
+      }
+      bool l = maxx(root->left);
+      bool r  = maxx(root->right);
+      
+      if(l && r && (root->data > root->left->data && root->data > root->right->data)) //root->data must be grater than both left and right data
+      {
+          return true;
+      }
+      
+      return false;
+
+  }
+    bool isHeap(struct Node* root) {
+        int total = counttotal(root); //count total node to check cbt ass we now if index of node id more than the nodes then it will we not cbt ass for cbt we need to fill it from left
+        
+        int index =0;
+        if(iscbt(root , index  ,total) && maxx(root)) // check cbt and maxx 
+        {
+            return true;
+        }// code here
+        return false;
+    }
+};
