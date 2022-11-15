@@ -1,0 +1,46 @@
+https://practice.geeksforgeeks.org/problems/merge-two-binary-max-heap0144/1
+
+
+
+class Solution{
+    public:
+    void heapify(vector<int>&arr , int i , int n)
+    {
+        int large = i;
+        int li = 2*i+1;
+        int ri= 2*i+2;
+        
+        if(li<n && arr[li]>arr[large] ) // isme apn last node ko checck ni krte is liye for lopp n/2 se chal raha h orr 
+        {                               // apn andar bali nodes ko sahi jagah prr pahucnhate h unke childs se compare krrke samja bhai 
+            large = li;
+        }
+        if(ri<n && arr[ri]>arr[large] )
+        {
+            large = ri;
+        }
+        if(large!=i)
+        {
+            swap(arr[i] , arr[large]);
+            heapify(arr ,large , n);  // fir usse next ke sath check krna oss tarah bo sahi jagah pahucha
+        }
+    }
+    vector<int> mergeHeaps(vector<int> &a, vector<int> &b, int n, int m) {
+        vector<int>v;
+        for(int i = 0 ;i<a.size() ; i++)
+        {
+            v.push_back(a[i]);
+        }
+        for(int i = 0 ;i<b.size() ; i++) // first of all dono heaps ke array ko merge krr do orr fir
+        {
+            v.push_back(b[i]);
+        }
+        
+        // int index =0;
+        int s = v.size();
+        for(int i = s/2 -1 ;i>=0 ;i--) // jo array mila h uss ko heapify krr do ho gya kaam
+        {
+            heapify(v , i ,s);
+        }
+        return v;
+    }
+};
