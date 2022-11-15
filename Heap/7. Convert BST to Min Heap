@@ -1,0 +1,49 @@
+https://www.codingninjas.com/codestudio/problems/convert-bst-to-min-heap_920498?leftPanelTab=1
+https://www.geeksforgeeks.org/convert-bst-min-heap/
+
+
+void inorderTraversal(BinaryTreeNode* root, vector<int>& arr)
+{
+    if (root == NULL)
+        return;
+
+    // first recur on left subtree
+    inorderTraversal(root->left, arr);
+
+    // then copy the data of the node
+    arr.push_back(root->data);
+
+    // now recur for right subtree
+    inorderTraversal(root->right, arr);
+}
+
+void BSTToMinHeap(BinaryTreeNode* root, vector<int> arr, int& i)
+{
+    if (root == NULL)
+        return;
+
+    // first copy data at index 'i' of 'arr' to
+    // the node
+    root->data = arr[++i]; //root
+
+    // then recur on left subtree
+    BSTToMinHeap(root->left, arr, i); // left
+
+    // now recur on right subtree
+    BSTToMinHeap(root->right, arr, i); //right
+}
+BinaryTreeNode* convertBST(BinaryTreeNode* root)
+{
+	vector<int> arr;
+    int i = -1;
+
+    // inorder traversal to populate 'arr'
+    inorderTraversal(root, arr); // sabse pahle uska inorder nikal lo konki apn isme nlr lagaynege kyonki jese root chhota hota h left and right se and condition h ek gfg bale me ki left part right bale e bhi chhota ho to mtlb
+                                  // inke bale me-> n <l and n<r
+                                  // and gfg bali condition  l<r
+                                  //ab dono combine to   n<l<r;
+                                  //ok is lai inorder
+
+    BSTToMinHeap(root, arr, i); // ab har use node ki value change krr do inorder ki value se
+    return root;
+}
