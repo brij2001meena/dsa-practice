@@ -1,0 +1,51 @@
+https://www.codingninjas.com/codestudio/problems/triplets-with-given-sum_893028?source=youtube&campaign=LoveBabbar_Codestudiovideo1&utm_source=youtube&utm_medium=affiliate&utm_campaign=LoveBabbar_Codestudiovideo1&leftPanelTab=1
+https://practice.geeksforgeeks.org/problems/triplet-sum-in-array-1587115621/1
+
+
+
+#include <bits/stdc++.h> 
+vector<vector<int>> findTriplets(vector<int>arr, int n, int K) {
+	sort(arr.begin() , arr.end());
+	vector<vector<int>>v;
+	for(int i = 0 ;i<n-2;i++) // n-2 because be need three element show last pair will be from third last element
+	{
+		if(i==0 || i>0 && arr[i]!=arr[i-1]) // eleminating similar element  when i >0 to check previous and current element arr different
+		{
+			int csum = K-arr[i];
+			int l = i+1;
+			int h = n-1;
+			while(l<h)
+			{
+				
+				if(arr[l]+arr[h] == csum)
+				{
+					vector<int>temp;
+					temp.push_back(arr[i]);
+					temp.push_back(arr[l]);
+					temp.push_back(arr[h]);
+					v.push_back(temp);
+				
+					while(l<h && arr[l]==arr[l+1])
+					{
+						l++; // eliminating similar elements
+					}
+					while(l<h && arr[h]==arr[h-1])
+					{
+						h--; //eliminating similar elements
+					}
+					l++;
+					h--;
+				}
+				else if(arr[l]+arr[h]<csum) // when sum is less
+				{
+					l++;
+				}
+				else{
+					h--; // when sum is mpre then csum
+				}
+			}
+		}
+	}
+	return v;
+		// Write your code here.
+}
