@@ -1,0 +1,51 @@
+https://practice.geeksforgeeks.org/problems/the-painters-partition-problem1535/1
+https://www.codingninjas.com/codestudio/problems/painter's-partition-problem_1089557?source=youtube&campaign=love_babbar_codestudio2&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_codestudio2&leftPanelTab=1
+
+
+bool isPos(vector<int>&arr,int n ,int k ,int mid)
+{
+    int paintercount=1;
+    int area =0;
+    for(int i = 0 ;i<n;i++)
+    {
+        if(area+arr[i]<=mid) // when area is under mid after addition for current painter then add it
+        {
+            area+=arr[i];
+        }
+        else{
+            paintercount++;
+            if(paintercount>k || arr[i]>mid) // if paintercount is more then given and when the next area to be add is more then mid 
+            {
+                return false;
+            }
+            area= arr[i];
+        }
+    }
+    return true;
+}
+
+int findLargestMinDistance(vector<int> &boards, int k)
+{
+    int s =0;
+    int e =0;
+    int mid;
+    int ans;
+    for(int i = 0 ;i<boards.size();i++) //total area find
+    {
+        e+=boards[i];
+    } 
+
+    while(s<=e)
+    {
+        mid = s+(e-s)/2;
+        if(isPos(boards ,boards.size() , k, mid)) // if true then need to decrease the size of partition so that we can find small partition
+        {
+            ans = mid;
+            e = mid-1;// to find small partition we do this 
+        }
+        else{
+            s = mid+1;// if not possible in current size partion of boards then increase partion area or size 
+        }
+    }
+    return ans;
+}
