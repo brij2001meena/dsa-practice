@@ -1,0 +1,17 @@
+https://practice.geeksforgeeks.org/problems/insertion-sort/1
+https://www.codingninjas.com/codestudio/problems/insertion-sort_3155179?source=youtube&campaign=love_babbar_codestudio2&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_codestudio2
+
+
+#include <bits/stdc++.h> 
+void insertionSort(int n, vector<int> &arr){
+    for(int i =1;i<n;i++)
+    {
+        int min = arr[i];// taking one element and comparing it with all previous element and if they are bigger then copying them to next postion to them 
+        int j;           //and in the end the element is placed at next position where the elements are no more bigger then the selected element
+        for(j = i-1;j>=0 && arr[j]>min;j--)
+        {
+            arr[j+1] = arr[j];
+        }
+        arr[j+1] = min;
+    }
+}
