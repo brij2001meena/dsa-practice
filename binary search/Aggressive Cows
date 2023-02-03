@@ -1,0 +1,47 @@
+https://practice.geeksforgeeks.org/problems/aggressive-cows/1?page=1&sortBy=newest&query=page1sortBynewest
+https://www.codingninjas.com/codestudio/problems/aggressive-cows_1082559?source=youtube&campaign=love_babbar_codestudio2&utm_source=youtube&utm_medium=affiliate&utm_campaign=love_babbar_codestudio2&leftPanelTab=0
+
+
+
+
+class Solution {
+public:
+bool ispos(vector<int>&stalls ,int n ,int k ,int mid)
+{
+    int countcows =1;
+    int currentcow =stalls[0];// first cow place at first postions
+    for(int i = 0;i<n;i++)
+    {
+        if(stalls[i]-currentcow>=mid) // they are not fighting at mid distace so they will not fight at distance more the mid so greater equals to is used
+        {
+            countcows++;
+            if(countcows==k)
+            {
+                return true;
+            }
+            currentcow = stalls[i];
+        }
+    }
+    return false;
+}
+int solve(int n, int k, vector<int> &stalls) {
+    sort(stalls.begin() , stalls.end());
+   int s =0;
+   int e = stalls[n-1];//maximum possible value for anycow to be placed will we this we can also take any big value but will be eliminated by binary search later
+   int ans=-1;
+   while(s<=e)
+   {
+       int mid = s+(e-s)/2;
+       if(ispos(stalls ,n , k,mid))
+       {
+           ans = mid;
+           s = mid+1;// because we neend maximum distance btw any 2 cows
+       }
+       else{
+           e = mid-1;
+       }
+   }
+   return ans;
+}
+};
+
