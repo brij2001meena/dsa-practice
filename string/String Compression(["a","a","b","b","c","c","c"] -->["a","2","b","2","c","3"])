@@ -1,47 +1,83 @@
-QUESTION LINK-> https://leetcode.com/problems/string-compression/
+https://leetcode.com/problems/string-compression/
+
 
 
 class Solution {
 public:
     int compress(vector<char>& v) {
-        int pos=0;
+        int ansindex=0;
         int s =0;
         int count;
         int i;
         for(i= 1 ;i<v.size() ;)
         {
-            if(v[s]==v[i])
+            if(v[s]==v[i]) // for comparing character v[s] with rest till find any differnet element is found 
             {
                 i++;
             }
             else{
-                v[pos++] = v[s];
-                count = i-s;
+                v[ansindex++] = v[s];// store char s at ansindex
+                count = i-s;  // the number of occurence of char v[s]
                 if(count>1)
                 {
-                    string d = to_string(count);
+                    string d = to_string(count);// we need to store digits also in character form  for that we convert them into string
                     for(auto ch:d)
                     {
-                        v[pos++] = ch;
+                        v[ansindex++] = ch;
                     }
                 }
-                s = i;
-                i++;
+                s = i;// next different character is at i now work on it
+                i++; 
             }
         }
-        if(i==v.size())
+        if(i==v.size())// when traverse the whole char array
         {
-             v[pos++] = v[s];
+             v[ansindex++] = v[s];
                 count = i-s;
                 if(count>1)
                 {
                     string d = to_string(count);
                     for(auto ch:d)
                     {
-                        v[pos++] = ch;
+                        v[ansindex++] = ch;
                     }
                 }
         }
+        
+        
+        
+        
+        
+        
+// same question with two while loops
+class Solution {
+public:
+    int compress(vector<char>& chars) {
+        int ansindex =0;
+        int i = 0;
+        int j;
+        int n = chars.size();
+        while(i<n)
+        {
+            j  =i+1; // for comparing chars[i] with rest till find any differnet element or we traverse the whole char array
+            while(j<n && chars[i]==chars[j])
+            {
+                j++;
+            }
+            chars[ansindex++] = chars[i]; // store char i at ansindex
+            int count = j-i;// the number of occurence of char[i]
+            if(count>1){
+                string cnt = to_string(count); // we need to store digits also in character form  for that we convert them into string
+                for(char c :cnt)
+                {
+                    chars[ansindex++] = c;
+                }
+            }
+            i = j;
+        }
+        return ansindex;
+    }
+};        
         return pos;
     }
 };
