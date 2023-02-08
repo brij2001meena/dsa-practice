@@ -1,0 +1,48 @@
+https://leetcode.com/problems/permutation-in-string/submissions/814158795/
+
+
+
+class Solution {
+public:
+bool check(int a1[] , int a2[])
+{
+    for(int i = 0 ;i<26;i++)
+    {
+        if(a1[i]!=a2[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+    bool checkInclusion(string s1, string s2) {
+        int a1[26] ={0};
+        int a2[26] = {0};
+        for(int i = 0 ;i<s1.length();i++)
+        {
+            a1[s1[i]-'a']++;                  // storing count of character in string s1
+        }
+
+        int window = s1.size();               // to find permuatation we are selecting a window size equal to s1 length we will check in this window
+        for(int i = 0 ;i<window && i<s2.length();i++)
+        {
+            a2[s2[i]-'a']++;                  // storing count s2 character in the length of window because we want to match with permuatation of s1 which has length equals to window
+        }
+        if(check(a1 ,a2))                     // checking first widnow is equal to any permuatation of s1
+        {
+            return true;
+        }
+        int i = window;
+        while(i<s2.size())                    //now rest charcter of s2 are match in fixed window size till permuatation is not match
+        {
+            a2[s2[i]-'a']++;                  //adding next charcter in the window
+            a2[s2[i-window]-'a']--;           // and removing last character from window beacuse it exceed the window size
+            if(check(a1 ,a2)) 
+            {
+                return true;
+            }
+            i++;
+        }
+        return false;
+    }
+};
