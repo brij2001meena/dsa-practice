@@ -1,0 +1,35 @@
+https://leetcode.com/problems/remove-all-adjacent-duplicates-in-string/description/
+
+
+
+
+class Solution {
+public:
+    string removeDuplicates(string s) {
+        stack<char>st;
+        for(int i = 0 ;i<s.size();i++)
+        {
+            if(st.empty())
+            {
+                st.push(s[i]);// putting element when stack is empty
+            }
+            else{
+                if(st.top()==s[i])// if top element are same means duplicate so ignore and remove from stack
+                {
+                    st.pop();
+                }
+                else{
+                    st.push(s[i]); // if not same then put on stack
+                }
+            }
+        }
+        s ="";
+        while(!st.empty()) // we find a stack with no duplicates so add into string and return it
+        {
+            s+=st.top();
+            st.pop();
+        }
+        reverse(s.begin() , s.end());
+        return s;
+    }
+};
