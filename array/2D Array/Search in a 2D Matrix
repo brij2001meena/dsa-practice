@@ -1,5 +1,6 @@
 https://practice.geeksforgeeks.org/problems/search-in-a-matrix17201720/1
-https://leetcode.com/problems/search-a-2d-matrix/submissions/627550376/
+https://leetcode.com/problems/search-a-2d-matrix-ii/description/
+
 
 
 
@@ -30,7 +31,8 @@ public:
 
 
 
-// ye bala leetcode prr hi chala upper bala dono prr
+https://leetcode.com/problems/search-a-2d-matrix/description/
+//iss bale question me hi chala ye upper bala bhi chal jayega
 class Solution {
 public:
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
