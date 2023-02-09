@@ -1,0 +1,121 @@
+https://practice.geeksforgeeks.org/problems/spirally-traversing-a-matrix-1587115621/1
+https://leetcode.com/problems/spiral-matrix/submissions/
+
+
+
+
+class Solution
+{   
+    public: 
+    //Function to return a list of integers denoting spiral traversal of matrix.
+    vector<int> spirallyTraverse(vector<vector<int> > matrix, int r, int c) 
+    {
+       vector<int>v;
+        int row = matrix.size();
+        int col = matrix[0].size();
+
+        int startingrow = 0;
+        int startingcol = 0;
+        int endingrow = row-1;
+        int endingcol = col-1;
+
+        int count =0;
+        int totalelement= row*col;
+        while(count<totalelement)
+        {
+            for(int i= startingcol;i<=endingcol && count<totalelement;i++)//l->r
+            {
+                v.push_back(matrix[startingrow][i]);
+                count++;
+            }
+            startingrow++;
+            for(int i = startingrow;i<=endingrow && count<totalelement;i++)//t->d
+            {
+                v.push_back(matrix[i][endingcol]);
+                count++;
+            } 
+            endingcol--;
+            for(int i = endingcol;i>=startingcol && count<totalelement;i--)//r->l
+            {
+                v.push_back(matrix[endingrow][i]);
+                count++;
+            }
+            endingrow--;
+            for(int i = endingrow;i>=startingrow && count<totalelement;i--)//d->t
+            {
+                v.push_back(matrix[i][startingcol]);
+                count++;
+            }
+            startingcol++;
+        }
+        return v;
+    }
+};
+
+
+
+
+//second way without count
+
+class Solution
+{   
+    public: 
+    //Function to return a list of integers denoting spiral traversal of matrix.
+    vector<int> spirallyTraverse(vector<vector<int> > m, int r, int c) 
+    {
+        vector<int>v;
+       int right = c-1;
+       int left = 0;
+       int down = r-1;
+       int top = 0;
+       int i = 0 , j = 0 ,rr =1 ,ll =0 ,uu=0 ,dd=0;
+       while(left<=right && top<=down){
+           if(rr==1){
+               rr=0;
+               while(j<=right){
+                   v.push_back(m[i][j]);
+                   j++;
+               }
+               top++;
+               i = top;
+               j = right;
+               dd = 1;
+           }
+           else if(dd==1){
+               dd=0;
+               while(i<=down){
+                   v.push_back(m[i][j]);
+                   i++;
+               }
+               right--;
+               j = right;
+               i = down;
+               ll=1;
+           }
+           else if(ll==1){
+               ll =0;
+               while(j>=left){
+                   v.push_back(m[i][j]);
+                   j--;
+               }
+               down--;
+               i = down;
+               j = left;
+               uu=1;
+           }
+           else if(uu==1){
+               uu=0;
+               while(i>=top){
+                   v.push_back(m[i][j]);
+                   i--;
+               }
+               left++;
+               j = left;
+               i = top;
+               rr = 1;
+           }
+       }
+         return v;  
+       // code here 
+    }
+};
