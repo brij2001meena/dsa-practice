@@ -1,6 +1,53 @@
 QUESTION LINK->https://practice.geeksforgeeks.org/problems/next-permutation5226/1
 
 
+
+
+
+class Solution{
+public:
+    vector<int> nextPermutation(int n, vector<int> arr){
+        int i;
+        
+        // isse check krr rahe h ki kaha bekar ho raha h and usse sudhar rahe h 
+        for(i = n-1; i>0;i--)
+        {  //i--- baha tak ho raha hoga jaha tak sahi h mtlb i element i-1 se chota hoga baha tak
+            if(arr[i]>arr[i-1] )// iss i-1 prr bekar ho raha h mtlv isko hata de to isse bada element bana sakte h 
+            {
+                int l;
+                for(l = n-1;l>=i; l--)// i-1 ko kisske sath exchange krenge bo dunda isse jo ki right of i-1 ka chota element jo ki i-1 se bada h
+                {
+                    if(arr[i-1]<arr[l])
+                    {
+                        break;
+                    }
+                }
+                swap(arr[i-1] , arr[l]);// jo chota elmeent right se mila orr i-1 se bada h un dono ko swpa kiya
+                int k = i;
+                int j = n-1;
+                while(k<=j)// remaining of i-1 ke right elments ko ascending me krr diya swap krrke
+                {
+                    swap(arr[k] , arr[j]);
+                    k++;
+                    j--;
+                }
+                break;
+            }
+        }
+        if(i==0)
+        {
+            reverse(arr.begin() , arr.end());// agr sahi tha sab to sabse chota number dunda inhe asscending me krr ke
+        }
+        return arr;
+    }
+};
+
+
+
+
+
+
+
 #include <bits/stdc++.h>
 using namespace std;
 
