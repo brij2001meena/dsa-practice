@@ -1,0 +1,47 @@
+https://practice.geeksforgeeks.org/problems/maximum-rectangular-area-in-a-histogram-1587115620/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
+https://leetcode.com/problems/largest-rectangle-in-histogram/
+
+
+class Solution
+{
+    public:
+    //Function to find largest rectangular area possible in a given histogram.
+    long long getMaxArea(long long arr[], int n)
+    {
+        stack<long long>s;// for finding small height
+        long long maxarea =INT_MIN;
+        int i =0;
+        while(i<n)
+        {
+            if(s.empty() || arr[s.top()]<=arr[i])// when empty or stack top element is less then current element then push into stack
+            {
+                s.push(i++);
+            }
+            else{// if stack is not empty and top element is greater then current element
+                int top = s.top();//stack top as the smallest (or minimum height) bar. 'i' is 'right index' for the top and element
+                                    // before top in stack is 'left index'
+                s.pop();
+                long long currentarea = arr[top]*(s.empty()?i:i-s.top()-1);// when stack empty means no left element is smaller then stack top element 
+                                                            //so for all we need to mutliply top element with i bars to get 
+                                                            //area of max ractangle with height equal to top element 
+                                                            //otherwise find area with height equal to top from left index(it is next minimum then top element) that is current top after pop and righindex that is current i
+                if(currentarea>maxarea)
+                {
+                    maxarea = currentarea;
+                }
+            }
+        }
+        
+        while(!s.empty())
+        {
+            int top = s.top();
+            s.pop();
+            long long currentarea = arr[top]*(s.empty()?i:i-s.top()-1);//-1 to ignore the next min element that is current top after pop of top element
+            if(currentarea>maxarea)
+            {
+                maxarea = currentarea;
+            }
+        }
+        return maxarea;
+    }
+};
