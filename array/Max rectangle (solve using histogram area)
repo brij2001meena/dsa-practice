@@ -1,0 +1,53 @@
+https://practice.geeksforgeeks.org/problems/max-rectangle/1
+
+
+
+class Solution{
+  public:
+  int maxhisto(int arr[] , int n)
+  {
+      stack<int>s;
+      int maxhistoarea = INT_MIN;
+      int i =0;
+      while(i<n)
+      {
+          if(s.empty() || arr[s.top()]<=arr[i])
+          {
+              s.push(i++);
+          }
+          else{
+              int tp = s.top();
+              s.pop();
+              int currentbararea = arr[tp]*(s.empty()?i:i-s.top()-1);
+              if(maxhistoarea<currentbararea)
+              {
+                  maxhistoarea = currentbararea;
+              }
+          }
+      }
+      while(!s.empty())
+      {
+          int tp = s.top();
+          s.pop();
+          int currentbararea = arr[tp]*(s.empty()?i:i-s.top()-1);
+          maxhistoarea = max(maxhistoarea , currentbararea);
+      }
+      return maxhistoarea;
+  }
+  
+    int maxArea(int arr[MAX][MAX], int n, int m) {
+        int maxarea = maxhisto(arr[0] , m);
+        for(int i =1; i<n;i++)
+        {
+            for(int j = 0;j<m;j++)
+            {
+                if(arr[i][j])
+                {
+                    arr[i][j] = arr[i][j]+arr[i-1][j];// finding new bars height by adding previous row element hight to current
+                }
+            }
+            maxarea = max(maxarea ,maxhisto(arr[i] , m));// calculating maxarea of rectangle in new histogram
+        }
+        return maxarea;
+    }
+};
