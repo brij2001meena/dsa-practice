@@ -44,6 +44,6 @@ int countDistinctWayToClimbStair(long long n)
             return 1;
         }
         else {
-            return (countDistinctWayToClimbStair(n-1)+countDistinctWayToClimbStair(n-2))%1000000007;
+            return (countDistinctWayToClimbStair(n-1)+countDistinctWayToClimbStair(n-2))%1000000007;// nth stair per ya to bo n-1 step se aaya hoga ya fir n-2 se
         }//  Write your code here.
 }
