@@ -1,4 +1,5 @@
 https://leetcode.com/problems/subsets/submissions/
+https://practice.geeksforgeeks.org/problems/subsets-1613027340/1?utm_source=gfg&utm_medium=article&utm_campaign=bottom_sticky_on_article
 
 class Solution {
 public:
@@ -6,14 +7,16 @@ public:
     {
         if(i==nums.size())
         {
-            ans.push_back(temp);
+            ans.push_back(temp);// if reach end means push the current output array in the main answer array
             return ;
         }
         else{
+            //exclude current element
             sub(nums , ans ,temp ,i+1);
+            
+            //include current element
             temp.push_back(nums[i]);
             sub(nums , ans ,temp ,i+1);
-            // ans.push_back(temp);
             
         }
     }
