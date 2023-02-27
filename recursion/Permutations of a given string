@@ -1,5 +1,5 @@
 https://practice.geeksforgeeks.org/problems/permutations-of-a-given-string2041/1?page=1&difficulty[]=1&category[]=Recursion&curated[]=7&sortBy=submissions
-
+https://leetcode.com/problems/permutations/description/
 
 
 class Solution
@@ -14,7 +14,7 @@ class Solution
 	    else{
 	        for(int i = l ; i<=r ;i++)
 	        {
-	            swap(s[i] ,s[l]); //sswap i and l with each other and 
+	            swap(s[i] ,s[l]); //swap i and l with each other and 
 	            permu(s ,l+1,r ,st);//call for next character
 	            swap(s[i],s[l]);//swap back i and l for reaching initial state(backtracking)
 	        }
