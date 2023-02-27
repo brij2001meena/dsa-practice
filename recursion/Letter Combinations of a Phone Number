@@ -1,4 +1,5 @@
 https://leetcode.com/problems/letter-combinations-of-a-phone-number/submissions/
+https://www.codingninjas.com/codestudio/problems/letter-combinations-of-a-phone-number_983623?leftPanelTab=0
 
 
 class Solution {
@@ -14,7 +15,7 @@ public:
             // string str1 = str;
             for(int j = 0 ;j<s.size() ;j++)
             {
-                str+=s[j];
+                str+=s[j];// pushing one element then letter remove it to add next element
                 comb(digits ,mapping , ans , str , i);
                 str.pop_back(); //we make here it to its previos state to add any other element 
             }
@@ -23,7 +24,7 @@ public:
     vector<string> letterCombinations(string digits) {
         vector<string>mapping ={" ", " " , "abc" , "def" , "ghi" , "jkl" , "mno" , "pqrs", "tuv"  , "wxyz"};
         vector<string>ans;
-        string st;
+        string st;//to store current string make using mapping char
         int i = 0;
         if(digits.size()==0)
         {
